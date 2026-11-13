@@ -48,9 +48,9 @@ nav.s{background:rgba(8,8,8,.6);backdrop-filter:blur(16px);-webkit-backdrop-filt
 .rv{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s}.rv.in{opacity:1;transform:none}
 .grid{display:grid;gap:20px}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
 #about .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;margin-top:40px}
-.ph{margin:0;position:relative;overflow:hidden;padding:0;max-width:420px;justify-self:center;width:100%}
-.ph img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 30%}
-.ph::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.92),rgba(185,9,24,.25) 45%,transparent 70%);pointer-events:none}
+.ph{margin:0;position:relative;overflow:hidden;padding:0;max-width:420px;justify-self:center;width:100%;aspect-ratio:4/5;min-height:320px;background:#150508;opacity:1!important;transform:none}
+.ph img{position:absolute;inset:0;z-index:0;display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%;opacity:1;visibility:visible}
+.ph::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(8,8,8,.92),rgba(185,9,24,.25) 45%,transparent 70%);pointer-events:none}
 .ph .wm{position:absolute;top:14px;right:14px;width:38px;z-index:2;filter:drop-shadow(0 0 6px #000)}
 .ph figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px;z-index:2;display:flex;flex-direction:column}
 .ph figcaption b{font:700 22px 'Space Grotesk'}.ph figcaption span{font-size:13px;color:#ddd}
@@ -179,6 +179,7 @@ const P=[
 const F=[["all","All"],["sw","Software"],["hw","Hardware"],["ai","AI & ML"],["web","Web Development"]];
 const $=s=>document.querySelector(s);
 $('#go').onclick=()=>{$('#intro').classList.add('out');document.body.classList.add('go');scrollTo(0,0)};
+(()=>{const im=document.querySelector('.ph img');if(!im)return;const alt=['assets/ashik.jpg','ashik.jpeg','Ashik.jpg','ashik.png','ashik.JPG'];let k=0;im.addEventListener('error',()=>{if(k<alt.length)im.src=alt[k++];else console.warn('Portrait not found: upload ashik.jpg next to index.html')})})();
 // skills
 const tb=$('#tabs'),sl=$('#skl');
 Object.keys(SK).forEach((k,i)=>{const b=document.createElement('button');b.className='tab'+(i?'':' on');b.textContent=k;b.onclick=()=>{tb.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');show(k)};tb.append(b)});
